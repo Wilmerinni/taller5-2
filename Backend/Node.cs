@@ -1,6 +1,6 @@
 namespace Backend;
 
-// Nodo de la lista doblemente ligada: guarda un valor y apunta al siguiente y al anterior.
+// A generic doubly linked list that remains sorted upon insertion.
 public class Node<T>
 {
     // Fields

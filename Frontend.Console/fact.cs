@@ -1,8 +1,6 @@
 namespace ListasLigadas;
 
-// What the user enters in the menu is compared as a number if both inputs are numeric
-// (so 2 ​​comes before 10), and as text in all other cases (Yellow, Blue...).
-// If the two types are mixed, numbers come before text.
+// A value that can be compared as a number or as text.
 public class Dato : IComparable<Dato>
 {
     // Fields

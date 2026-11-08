@@ -2,11 +2,10 @@ using Backend;
 
 namespace ListasLigadas;
 
-// Convierte el texto que escribe el usuario en un valor del tipo T.
+// A delegate that tries to parse a string into a value of type T.
 public delegate bool TryParse<T>(string text, out T value);
 
-// Menú de consola para operar sobre una lista doblemente ligada de cualquier tipo.
-// Solo pide datos y muestra resultados: toda la lógica está en Backend.DoublyLinkedList.
+// A menu for interacting with a generic doubly linked list.
 public class ListMenu<T> where T : IComparable<T>
 {
     // Fields
@@ -75,7 +74,7 @@ public class ListMenu<T> where T : IComparable<T>
             }
         }
     }
-
+    //====MENU METHODS====
     // Private Methods
     private void ShowMenu()
     {
@@ -185,7 +184,7 @@ public class ListMenu<T> where T : IComparable<T>
 
     private void RemoveOne()
     {
-        if (!ReadValue("Elemento a eliminar (una ocurrencia): ", out var value))
+        if (!ReadValue("Elemento a eliminar (ocurrencia): ", out var value))
         {
             return;
         }
@@ -215,8 +214,7 @@ public class ListMenu<T> where T : IComparable<T>
             Console.WriteLine($"No existe el {Format(value)}, no se eliminó nada.");
         }
     }
-
-    // Pide un valor por consola y lo convierte al tipo T.
+    
     private bool ReadValue(string message, out T value)
     {
         Console.Write(message);

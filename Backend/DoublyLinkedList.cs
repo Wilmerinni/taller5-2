@@ -1,7 +1,7 @@
 namespace Backend;
 
-// Lista doblemente ligada genérica que se mantiene ordenada al insertar.
-// T debe poder compararse (IComparable<T>) para saber dónde va cada elemento.
+// // A generic doubly linked list that remains sorted upon insertion.
+// T must be comparable (IComparable<T>) so that the position of each element can be determined.
 public class DoublyLinkedList<T> where T : IComparable<T>
 {
     // Fields
@@ -47,8 +47,8 @@ public class DoublyLinkedList<T> where T : IComparable<T>
 
     // Public Methods
 
-    // Inserta el valor directamente en la posición que le corresponde.
-    // Si ya hay valores iguales, el nuevo queda después de ellos.
+    // IInserts the value directly into its corresponding position. 
+// If identical values ​​already exist, the new one is placed after them.
     public void Add(T value)
     {
         var node = new Node<T>(value);
@@ -61,7 +61,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
             return;
         }
 
-        // Se busca el primer nodo que debe quedar DESPUÉS del nuevo.
+        // Find the first node that should come AFTER the new one.
         var current = _head;
         while (current != null && Compare(current.Value, value) <= 0)
         {
@@ -70,21 +70,21 @@ public class DoublyLinkedList<T> where T : IComparable<T>
 
         if (current == null)
         {
-            // Va al final.
+            // to finish
             node.Previous = _tail;
             _tail!.Next = node;
             _tail = node;
         }
         else if (current == _head)
         {
-            // Va al inicio.
+            // to start
             node.Next = _head;
             _head.Previous = node;
             _head = node;
         }
         else
         {
-            // Va en medio, justo antes de current.
+            // to middle
             node.Previous = current.Previous;
             node.Next = current;
             current.Previous!.Next = node;
@@ -93,7 +93,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         _count++;
     }
 
-    // Recorre la lista desde la cabeza hasta la cola.
+    // Traverse the list from head to tail.
     public List<T> GetForward()
     {
         var result = new List<T>();
@@ -106,7 +106,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return result;
     }
 
-    // Recorre la lista desde la cola hasta la cabeza, usando los enlaces "anterior".
+    // Traverse the list from tail to head.
     public List<T> GetBackward()
     {
         var result = new List<T>();
@@ -119,9 +119,9 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return result;
     }
 
-    // Cambia el orden real de la lista (no solo la muestra al revés):
-    // como la lista siempre está ordenada, invertir los enlaces de cada nodo
-    // la deja en orden descendente. Las inserciones siguientes respetan ese orden.
+    // Changes the actual order of the list (not just its display order):
+    // since the list is always sorted, reversing the links of each node
+    // puts it in descending order. Subsequent insertions will respect this order.
     public void SortDescending()
     {
         if (!_isAscending)
@@ -141,8 +141,8 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         _isAscending = false;
     }
 
-    // Cuántas veces aparece cada valor, en el orden en que están en la lista.
-    // Como la lista está ordenada, los repetidos quedan juntos.
+    // How many times each value appears, in the order in which they occur in the list. 
+    // Since the list is sorted, repeated values ​​are grouped together.
     public List<(T Value, int Count)> GetOccurrences()
     {
         var result = new List<(T Value, int Count)>();
@@ -161,7 +161,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return result;
     }
 
-    // La moda es el valor que más veces aparece; si hay empate, devuelve todas.
+    // If there is a tie, return all of them.
     public (List<T> Modes, int Frequency) GetModes()
     {
         var modes = new List<T>();
@@ -182,13 +182,13 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return (modes, frequency);
     }
 
-    // Dice si existe al menos un elemento con ese valor.
+    // there exists at least one element with that value.
     public bool Exists(T value)
     {
         return FindNode(value) != null;
     }
 
-    // Elimina solo la primera ocurrencia encontrada.
+    // Removes the first occurrence of the value and returns true if it was found and removed, or false if it was not found.
     public bool RemoveFirst(T value)
     {
         var node = FindNode(value);
@@ -200,7 +200,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return true;
     }
 
-    // Elimina todas las ocurrencias y devuelve cuántas eliminó.
+    // Removes all occurrences of the value and returns how many were removed.
     public int RemoveAll(T value)
     {
         var removed = 0;
@@ -220,7 +220,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
 
     // Private Methods
 
-    // Compara respetando el orden actual de la lista (ascendente o descendente).
+    // Compares two values ​​according to the current order of the list.
     private int Compare(T first, T second)
     {
         return _isAscending ? first.CompareTo(second) : second.CompareTo(first);
@@ -240,7 +240,7 @@ public class DoublyLinkedList<T> where T : IComparable<T>
         return null;
     }
 
-    // Desconecta el nodo: el anterior y el siguiente pasan a apuntarse entre sí.
+    // Removes the node from the list and updates the links of its neighbors.
     private void RemoveNode(Node<T> node)
     {
         if (node.Previous != null)
