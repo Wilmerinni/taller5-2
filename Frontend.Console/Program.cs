@@ -1,7 +1,6 @@
 using ListasLigadas;
 
-Console.WriteLine("Lista doblemente ligada genérica");
-Console.WriteLine("wilmerholguin");
+Console.WriteLine("=================MENU=================");
 Console.WriteLine("================================");
 
 new ListMenu<Dato>((string text, out Dato value) =>
