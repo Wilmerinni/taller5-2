@@ -69,7 +69,7 @@ public class ListMenu<T> where T : IComparable<T>
             if (option != 0)
             {
                 Console.WriteLine();
-                Console.Write("Presiona Enter para continuar...");
+                Console.Write("Dale Enter pa ir al menu");
                 Console.ReadLine();
             }
         }
@@ -162,7 +162,7 @@ public class ListMenu<T> where T : IComparable<T>
         }
         foreach (var (value, count) in _list.GetOccurrences())
         {
-            Console.WriteLine($"{Format(value)} {new string('*', count)}");
+            Console.WriteLine($"{Format(value)} {string.Join(" ", Enumerable.Repeat("*", count))}");
         }
     }
 
