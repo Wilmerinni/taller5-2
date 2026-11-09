@@ -62,7 +62,7 @@ public class ListMenu<T> where T : IComparable<T>
                     Console.WriteLine("¡Hasta luego!");
                     break;
                 default:
-                    Console.WriteLine("Opción inválida. Elige un número del 0 al 9.");
+                    Console.WriteLine("Opción inválida.");
                     break;
             }
 
@@ -214,7 +214,7 @@ public class ListMenu<T> where T : IComparable<T>
             Console.WriteLine($"No existe el {Format(value)}, no se eliminó nada.");
         }
     }
-    
+
     private bool ReadValue(string message, out T value)
     {
         Console.Write(message);
